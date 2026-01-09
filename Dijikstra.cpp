@@ -320,11 +320,11 @@ void solve()
     debug(result);
 
     
+}
 
     
     
     
-}
 
 int main() 
 {

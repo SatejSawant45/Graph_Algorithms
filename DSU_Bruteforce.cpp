@@ -361,7 +361,7 @@ int main()
     cin >> n;
 
     ll setbitss = __builtin_popcountll(n);
-    while(t--)
+    while(n--)
     {
         solve();
     }

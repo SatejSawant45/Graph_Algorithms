@@ -144,51 +144,52 @@ void Sieve()
 
 }
 
-vector<int> bfsOfGraph(int V, vector<int> adj[]) 
+vector<ll> BFS(int n,map<ll,vector<ll>> &mp,vector<ll> &visited,ll startNode)
 {
-    int vis[V] = {0}; 
-    vis[0] = 1; 
-    queue<int> q;
-     
-    q.push(0); 
-    vector<int> bfs; 
-       
-    while(!q.empty()) 
+    vector<ll> bfsvector;
+    queue<ll> que;
+ 
+    que.push(startNode);
+    visited[startNode] = 1;
+ 
+    while(!que.empty())
     {
-       
-        int node = q.front(); 
-        q.pop(); 
-        bfs.push_back(node); 
-           
-        for(auto it : adj[node]) 
+        ll x = que.front();
+        que.pop();
+        vector<ll> v = mp[x];
+ 
+        bfsvector.push_back(x);
+        for(auto ele:v)
         {
-               
-            if(!vis[it]) {
-                vis[it] = 1; 
-                q.push(it); 
+            if(!visited[ele])
+            {
+                visited[ele] = 1;
+                que.push(ele);
             }
         }
     }
-    return bfs; 
+ 
+    return bfsvector;
+ 
+ 
+ 
 }
-
-void dfs(int node, vector<int> adj[], int vis[], vector<int> &ls) 
-{
-        /*
-        node - start node
-        adj - graph 
-        vis - visited 
-        ls - final vector containing dfs
-        */
-        vis[node] = 1; 
-        ls.push_back(node); 
-        for(auto it : adj[node]) 
+vector<ll> dfsvector;
+void DFS(int n,map<ll,vector<ll>> &mp,vector<ll> &visited,ll node)
+{    
+    visited[node] = 1;
+    dfsvector.push_back(node);
+    vector<ll> v = mp[node];
+ 
+    for(auto ele:v)
+    {
+        if(!visited[ele])
         {
-            if(!vis[it]) 
-            {
-                dfs(it, adj, vis, ls); 
-            }
+            DFS(n,mp,visited,ele);
         }
+    }
+ 
+ 
 }
 
 void addEdge(vector <int> adj[], int u, int v) {
